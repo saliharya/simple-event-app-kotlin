@@ -5,4 +5,8 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="log_in">Log In</string>
+    <string name="logout">Logout</string>
+    <string name="new_event">New Event</string>
+    <string name="thumbnail">Thumbnail</string>
+    <string name="upcoming">Upcoming</string>
 </resources>
