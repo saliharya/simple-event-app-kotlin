@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-parcelize")
 }
 
 android {
@@ -45,6 +46,9 @@ dependencies {
     implementation(libs.retrofit.gson)
 
     implementation(libs.koin.android)
+
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
 
     implementation(project(":common"))
 }
