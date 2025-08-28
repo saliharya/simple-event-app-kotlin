@@ -20,4 +20,10 @@
     <string name="organizer">Organizer</string>
     <string name="upload_event_thumbnail">Upload Event Thumbnail</string>
     <string name="submit_event">Submit Event</string>
+    <string name="other_events">Other events</string>
+    <string name="room_placeholder">Room 202</string>
+    <string name="start_date_placeholder">Apr 20, 2026, 1:00 PM</string>
+    <string name="organizer_placeholder">Innovation Hub</string>
+    <string name="event_name_placeholder">Web Development Workshop</string>
+    <string name="event_hub">Event Hub</string>
 </resources>

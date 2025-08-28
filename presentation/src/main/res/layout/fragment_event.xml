@@ -7,24 +7,38 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvEventHub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="@string/event_hub"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <include
                 android:id="@+id/upcomingEventLayout"
                 layout="@layout/item_upcoming_event" />
 
-            <View
-                android:id="@+id/divider"
+            <TextView
+                android:id="@+id/tvOtherEvents"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:background="#E0E0E0" />
+                android:paddingTop="16dp"
+                android:text="@string/other_events"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvEmptyEvent"

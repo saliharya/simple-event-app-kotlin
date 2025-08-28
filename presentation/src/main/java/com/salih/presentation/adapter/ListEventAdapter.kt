@@ -2,6 +2,7 @@ package com.salih.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.salih.core.domain.model.EventEntity
 import com.salih.presentation.databinding.ItemEventBinding
@@ -15,11 +16,7 @@ class ListEventAdapter(
 
         fun bind(event: EventEntity) {
             binding.tvEventName.text = event.name
-            binding.tvStartDate.text = buildString {
-                append(event.startDateTime)
-                append(" - ")
-                append(event.endDateTime)
-            }
+            binding.tvStartDate.text = event.startDateTime
             binding.tvOrganizer.text = event.organizer
             binding.tvLocation.text = event.location
         }
@@ -39,7 +36,10 @@ class ListEventAdapter(
     override fun getItemCount(): Int = listEvent.size
 
     fun setData(newList: List<EventEntity>) {
+        val diffCallback = EventListDiffUtil(listEvent, newList)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+
         listEvent = newList
-        notifyDataSetChanged()
+        diffResult.dispatchUpdatesTo(this)
     }
 }
