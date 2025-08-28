@@ -17,10 +17,10 @@
 
             <include
                 android:id="@+id/upcomingEventLayout"
-                layout="@layout/item_upcoming_event"
-                android:visibility="gone" />
+                layout="@layout/item_upcoming_event" />
 
             <View
+                android:id="@+id/divider"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginVertical="8dp"
@@ -30,12 +30,12 @@
                 android:id="@+id/tvEmptyEvent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/empty_event"
                 android:gravity="center"
-                android:visibility="gone"
-                android:textSize="16sp"
+                android:padding="16dp"
+                android:text="@string/empty_event"
                 android:textColor="@android:color/darker_gray"
-                android:padding="16dp"/>
+                android:textSize="16sp"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvEvents"

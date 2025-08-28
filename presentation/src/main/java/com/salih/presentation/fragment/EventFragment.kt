@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.salih.common.base.BaseFragment
 import com.salih.presentation.adapter.ListEventAdapter
 import com.salih.presentation.databinding.FragmentEventBinding
@@ -29,6 +30,11 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
             adapter = this@EventFragment.adapter
         }
         viewModel.fetchAllEvents()
+
+        binding.btnNewEvent.setOnClickListener {
+            val newEventFragment = NewEventFragment()
+            newEventFragment.show(parentFragmentManager, "NewEventFragment")
+        }
     }
 
     override fun observeData() {
@@ -39,6 +45,20 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
                 } else {
                     binding.upcomingEventLayout.root.visibility = View.VISIBLE
                     binding.upcomingEventLayout.tvEventName.text = event.name
+                    binding.upcomingEventLayout.tvEventDate.text = buildString {
+                        append(event.startDateTime)
+                        append(" - ")
+                        append(event.endDateTime)
+                    }
+                    binding.upcomingEventLayout.tvOrganizer.text = buildString {
+                        append(event.organizer)
+                        append(" | ")
+                        append(event.location)
+                    }
+                    binding.upcomingEventLayout.tvDescription.text = event.description
+                    Glide.with(requireContext())
+                        .load(event.thumbnailUrl)
+                        .into(binding.upcomingEventLayout.imgThumbnail)
                 }
             }
         }
@@ -48,9 +68,11 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
                 if (list.isEmpty() && viewModel.firstEvent.value == null) {
                     binding.tvEmptyEvent.visibility = View.VISIBLE
                     binding.rvEvents.visibility = View.GONE
+                    binding.divider.visibility = View.GONE
                 } else {
                     binding.tvEmptyEvent.visibility = View.GONE
                     binding.rvEvents.visibility = View.VISIBLE
+                    binding.divider.visibility = View.VISIBLE
                     adapter.setData(list)
                 }
             }
