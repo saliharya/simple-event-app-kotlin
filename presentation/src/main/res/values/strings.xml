@@ -9,4 +9,5 @@
     <string name="new_event">New Event</string>
     <string name="thumbnail">Thumbnail</string>
     <string name="upcoming">Upcoming</string>
+    <string name="empty_event">Empty event</string>
 </resources>
