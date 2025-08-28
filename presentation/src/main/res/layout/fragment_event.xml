@@ -7,24 +7,38 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
         android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="80dp"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvEventHub"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="@string/event_hub"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <include
                 android:id="@+id/upcomingEventLayout"
                 layout="@layout/item_upcoming_event" />
 
-            <View
-                android:id="@+id/divider"
+            <TextView
+                android:id="@+id/tvOtherEvents"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="wrap_content"
                 android:layout_marginVertical="8dp"
-                android:background="#E0E0E0" />
+                android:paddingTop="16dp"
+                android:text="@string/other_events"
+                android:textColor="@android:color/darker_gray"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvEmptyEvent"
@@ -56,22 +70,32 @@
         android:padding="12dp"
         app:layout_anchorGravity="bottom">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/logout" />
+            android:layout_weight="2"
+            android:backgroundTint="@android:color/white"
+            android:padding="12dp"
+            android:text="@string/logout"
+            android:textColor="@android:color/black"
+            app:icon="@drawable/ic_logout"
+            app:iconGravity="textStart"
+            app:iconPadding="8dp" />
 
         <Space
             android:layout_width="16dp"
             android:layout_height="match_parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNewEvent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/new_event" />
+            android:layout_weight="3"
+            android:backgroundTint="@android:color/holo_blue_dark"
+            android:padding="12dp"
+            android:text="@string/new_event"
+            android:textColor="@android:color/white" />
+
     </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -4,7 +4,7 @@ import com.salih.core.data.model.dto.EventDto
 import com.salih.core.domain.model.EventEntity
 
 fun EventDto.toEntity() = EventEntity(
-    id = id ?: 0L,
+    id = id,
     name = name.orEmpty(),
     thumbnailUrl = thumbnailUrl.orEmpty(),
     startDateTime = startDateTime.orEmpty(),
@@ -15,7 +15,7 @@ fun EventDto.toEntity() = EventEntity(
 )
 
 fun EventEntity.toDto() = EventDto(
-    id = id,
+    id = 0L,
     name = name,
     thumbnailUrl = thumbnailUrl,
     startDateTime = startDateTime,

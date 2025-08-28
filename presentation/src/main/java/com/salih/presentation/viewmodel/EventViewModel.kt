@@ -20,13 +20,7 @@ class EventViewModel(
     private val _firstEvent = MutableStateFlow<EventEntity?>(null)
     val firstEvent: StateFlow<EventEntity?> get() = _firstEvent
 
-    fun insertEvent(event: EventEntity) {
-        viewModelScope.launch {
-            insertEventUseCase(event)
-        }
-    }
-
-    fun fetchAllEvents() {
+    init {
         viewModelScope.launch {
             getAllEventsUseCase().collect { list ->
                 if (list.isNotEmpty()) {
@@ -37,6 +31,12 @@ class EventViewModel(
                     _events.value = emptyList()
                 }
             }
+        }
+    }
+
+    fun insertEvent(event: EventEntity) {
+        viewModelScope.launch {
+            insertEventUseCase(event)
         }
     }
 }

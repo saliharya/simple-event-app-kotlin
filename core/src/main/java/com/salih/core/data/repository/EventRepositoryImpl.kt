@@ -6,6 +6,7 @@ import com.salih.core.data.mapper.toEntity
 import com.salih.core.domain.model.EventEntity
 import com.salih.core.domain.repository.EventRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 class EventRepositoryImpl(
     private val eventDao: EventDao
@@ -16,7 +17,6 @@ class EventRepositoryImpl(
     }
 
     override fun getAllEvents(): Flow<List<EventEntity>> =
-        kotlinx.coroutines.flow.flow {
-            emit(eventDao.getAllEvents().map { it.toEntity() })
-        }
+        eventDao.getAllEvents()
+            .map { listDto -> listDto.map { it.toEntity() } }
 }

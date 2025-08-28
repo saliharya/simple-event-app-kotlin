@@ -7,6 +7,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.salih.common.base.BaseFragment
 import com.salih.presentation.adapter.ListEventAdapter
 import com.salih.presentation.databinding.FragmentEventBinding
@@ -30,11 +31,15 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@EventFragment.adapter
         }
-        viewModel.fetchAllEvents()
 
         binding.btnNewEvent.setOnClickListener {
             val newEventFragment = NewEventFragment()
             newEventFragment.show(parentFragmentManager, "NewEventFragment")
+        }
+
+        binding.btnLogout.setOnClickListener {
+            val logoutConfirmFragment = LogoutConfirmFragment()
+            logoutConfirmFragment.show(parentFragmentManager, "LogoutConfirmFragment")
         }
     }
 
@@ -60,6 +65,7 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
                     if (event.thumbnailUrl.isNotEmpty()) {
                         Glide.with(requireContext())
                             .load(event.thumbnailUrl.toUri())
+                            .transform(RoundedCorners(16))
                             .into(binding.upcomingEventLayout.imgThumbnail)
                     }
                 }
@@ -71,11 +77,11 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
                 if (list.isEmpty() && viewModel.firstEvent.value == null) {
                     binding.tvEmptyEvent.visibility = View.VISIBLE
                     binding.rvEvents.visibility = View.GONE
-                    binding.divider.visibility = View.GONE
+                    binding.tvOtherEvents.visibility = View.GONE
                 } else {
                     binding.tvEmptyEvent.visibility = View.GONE
                     binding.rvEvents.visibility = View.VISIBLE
-                    binding.divider.visibility = View.VISIBLE
+                    binding.tvOtherEvents.visibility = View.VISIBLE
                     adapter.setData(list)
                 }
             }
