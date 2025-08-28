@@ -30,7 +30,6 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = this@EventFragment.adapter
         }
-        viewModel.fetchAllEvents()
 
         binding.btnNewEvent.setOnClickListener {
             val newEventFragment = NewEventFragment()
