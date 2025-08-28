@@ -3,6 +3,7 @@ package com.salih.presentation.fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
@@ -52,13 +53,15 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
                     }
                     binding.upcomingEventLayout.tvOrganizer.text = buildString {
                         append(event.organizer)
-                        append(" | ")
+                        append(" \u2022 ")
                         append(event.location)
                     }
                     binding.upcomingEventLayout.tvDescription.text = event.description
-                    Glide.with(requireContext())
-                        .load(event.thumbnailUrl)
-                        .into(binding.upcomingEventLayout.imgThumbnail)
+                    if (event.thumbnailUrl.isNotEmpty()) {
+                        Glide.with(requireContext())
+                            .load(event.thumbnailUrl.toUri())
+                            .into(binding.upcomingEventLayout.imgThumbnail)
+                    }
                 }
             }
         }

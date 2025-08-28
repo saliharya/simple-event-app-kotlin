@@ -1,5 +1,6 @@
 package com.salih.presentation.fragment
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
@@ -24,13 +25,28 @@ class NewEventFragment : BottomSheetDialogFragment() {
     private var _binding: FragmentNewEventBinding? = null
     private val binding get() = _binding!!
     private val viewModel: EventViewModel by viewModel()
-
     private var selectedThumbnailUri: Uri? = null
+    private val pickImageFallback =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val uri = result.data?.data
+                if (uri != null) {
+                    requireContext().contentResolver.takePersistableUriPermission(
+                        uri,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    )
+
+                    selectedThumbnailUri = uri
+                    updateUploadButtonText(uri)
+                    Log.d("NewEventFragment", "Selected image via fallback: $uri")
+                }
+            }
+        }
+
     private val pickMedia =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri ->
             if (uri != null) {
                 selectedThumbnailUri = uri
-                grantUriPermission(uri)
                 updateUploadButtonText(uri)
             }
         }
@@ -50,8 +66,17 @@ class NewEventFragment : BottomSheetDialogFragment() {
         binding.btnClose.setOnClickListener { dismiss() }
 
         binding.btnUploadThumbnail.setOnClickListener {
-            pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            if (ActivityResultContracts.PickVisualMedia.isPhotoPickerAvailable()) {
+                pickMedia.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+            } else {
+                val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                    addCategory(Intent.CATEGORY_OPENABLE)
+                    type = "image/*"
+                }
+                pickImageFallback.launch(intent)
+            }
         }
+
 
         binding.etStartDate.setOnClickListener {
             showDatePicker { date -> binding.etStartDate.setText(date) }
@@ -74,17 +99,7 @@ class NewEventFragment : BottomSheetDialogFragment() {
         }
     }
 
-    private fun grantUriPermission(uri: Uri) {
-        val takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-        try {
-            requireContext().contentResolver.takePersistableUriPermission(uri, takeFlags)
-        } catch (e: SecurityException) {
-            Log.e("NewEventFragment", "Failed to take persistable permission", e)
-        }
-    }
-
     private fun updateUploadButtonText(uri: Uri) {
-        // Ambil nama file dari URI (fallback ke uri.toString() jika tidak ditemukan)
         val fileName = getFileNameFromUri(uri) ?: uri.lastPathSegment ?: "Selected Image"
         binding.btnUploadThumbnail.text = fileName
     }
