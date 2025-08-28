@@ -1,4 +1,5 @@
 package com.salih.presentation.di
+
 import com.salih.core.domain.usecase.GetAllEventsUseCase
 import com.salih.core.domain.usecase.InsertEventUseCase
 import com.salih.presentation.viewmodel.AuthViewModel
@@ -11,5 +12,5 @@ val presentationModule = module {
     factory { GetAllEventsUseCase(get()) }
 
     viewModel { EventViewModel(get(), get()) }
-    viewModel { AuthViewModel(get()) }
+    viewModel { AuthViewModel(get(), get(), get()) }
 }

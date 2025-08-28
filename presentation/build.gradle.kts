@@ -48,6 +48,7 @@ dependencies {
 
     implementation(libs.glide)
     implementation(libs.koin.android)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
     implementation(project(":common"))
     implementation(project(":core"))

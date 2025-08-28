@@ -2,7 +2,9 @@ package com.salih.core.data.di
 
 import com.google.gson.Gson
 import com.salih.core.data.remote.AuthService
+import com.salih.core.domain.usecase.IsLoggedInUseCase
 import com.salih.core.domain.usecase.LoginUseCase
+import com.salih.core.domain.usecase.LogoutUseCase
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -12,6 +14,8 @@ val remoteModule = module {
     single { Gson() }
 
     single { LoginUseCase(get()) }
+    single { LogoutUseCase(get()) }
+    single { IsLoggedInUseCase(get()) }
 
     single {
         OkHttpClient.Builder()

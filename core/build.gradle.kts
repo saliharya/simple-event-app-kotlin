@@ -53,5 +53,11 @@ dependencies {
     ksp(libs.room.compiler)
     implementation(libs.sqlcipher)
 
+    implementation(libs.androidx.datastore.preferences)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.kotlinx.coroutines.core)
+    implementation(libs.kotlinx.coroutines.android)
+
     implementation(project(":common"))
 }

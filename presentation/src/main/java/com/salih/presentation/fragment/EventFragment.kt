@@ -36,6 +36,11 @@ class EventFragment : BaseFragment<FragmentEventBinding, EventViewModel>() {
             val newEventFragment = NewEventFragment()
             newEventFragment.show(parentFragmentManager, "NewEventFragment")
         }
+
+        binding.btnLogout.setOnClickListener {
+            val logoutConfirmFragment = LogoutConfirmFragment()
+            logoutConfirmFragment.show(parentFragmentManager, "LogoutConfirmFragment")
+        }
     }
 
     override fun observeData() {
