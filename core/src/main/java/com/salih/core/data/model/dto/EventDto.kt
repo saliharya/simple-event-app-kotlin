@@ -6,7 +6,8 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class EventDto(
-    @PrimaryKey val id: Long?,
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0L,
     val name: String?,
     @SerializedName("thumbnail_url") val thumbnailUrl: String?,
     @SerializedName("start_date_time") val startDateTime: String?,
