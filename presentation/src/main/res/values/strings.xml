@@ -5,4 +5,19 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="log_in">Log In</string>
+    <string name="logout">Logout</string>
+    <string name="new_event">New Event</string>
+    <string name="thumbnail">Thumbnail</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="empty_event">Empty event</string>
+    <string name="event_name">Event Name</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
+    <string name="start_date">Start Date</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_date">End Date</string>
+    <string name="end_time">End Time</string>
+    <string name="organizer">Organizer</string>
+    <string name="upload_event_thumbnail">Upload Event Thumbnail</string>
+    <string name="submit_event">Submit Event</string>
 </resources>

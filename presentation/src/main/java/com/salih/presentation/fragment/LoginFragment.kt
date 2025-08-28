@@ -56,6 +56,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, AuthViewModel>() {
     }
 
     private fun navigateToHome() {
+        requireActivity().supportFragmentManager.beginTransaction()
+            .replace(com.salih.presentation.R.id.fragment_container, EventFragment())
+            .addToBackStack(null)
+            .commit()
+
         requireActivity().showToast("Login berhasil!")
     }
 }

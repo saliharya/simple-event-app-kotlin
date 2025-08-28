@@ -2,6 +2,7 @@ package com.salih.simpleevent
 
 import android.app.Application
 import androidx.multidex.MultiDex
+import com.salih.core.data.di.databaseModule
 import com.salih.core.data.di.remoteModule
 import com.salih.core.data.di.repositoryModule
 import com.salih.presentation.di.presentationModule
@@ -19,6 +20,7 @@ class SimpleEventApp : Application() {
                     remoteModule,
                     presentationModule,
                     repositoryModule,
+                    databaseModule
                 )
             )
         }
