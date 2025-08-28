@@ -2,7 +2,9 @@ package com.salih.simpleevent
 
 import android.app.Application
 import androidx.multidex.MultiDex
-import com.salih.presentation.module.presentationModule
+import com.salih.core.data.di.remoteModule
+import com.salih.core.data.di.repositoryModule
+import com.salih.presentation.di.presentationModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -14,7 +16,9 @@ class SimpleEventApp : Application() {
             androidContext(this@SimpleEventApp)
             modules(
                 listOf(
+                    remoteModule,
                     presentationModule,
+                    repositoryModule,
                 )
             )
         }
